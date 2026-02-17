@@ -1,0 +1,54 @@
+{
+  "name": "space-hub",
+  "version": "5.0.0",
+  "description": "Premium Windows Desktop Hub — Search, Shortcuts, Pomodoro, Snippets & More",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --windows",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.antigravity.spacehub",
+    "productName": "SpaceHub",
+    "copyright": "Copyright © 2026 Antigravity",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ],
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SpaceHub",
+      "runAfterFinish": true
+    },
+    "files": [
+      "**/*",
+      "!dist/*"
+    ]
+  },
+  "keywords": [
+    "search",
+    "shortcuts",
+    "electron",
+    "windows",
+    "pomodoro",
+    "productivity"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^26.7.0"
+  }
+}

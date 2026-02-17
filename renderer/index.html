@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPACE | Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-shell" id="app-shell">
+        <!-- Animated Background -->
+        <div class="bg-effects">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="mesh-grid"></div>
+        </div>
+
+        <div class="glass-frame">
+            <!-- WINDOW DRAG BAR -->
+            <div class="drag-bar">
+                <div class="drag-handle"></div>
+                <div class="window-controls">
+                    <button class="win-btn win-minimize" onclick="window.electronAPI.hideWindow()"
+                        title="Gizle">─</button>
+                </div>
+            </div>
+
+            <!-- TOP: SEARCH BAR -->
+            <header class="search-header">
+                <div class="search-box">
+                    <div class="search-brand">
+                        <span class="brand-icon">◆</span>
+                        <span class="brand-text">SPACE</span>
+                    </div>
+                    <input type="text" id="master-search"
+                        placeholder="Ara... (dosya, uygulama, çeviri ç:, matematik, web)" autofocus autocomplete="off"
+                        spellcheck="false">
+                    <div class="search-meta">
+                        <kbd>ALT+SPACE</kbd>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NAVIGATION TABS -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="home" id="tab-home">
+                    <span class="tab-icon">🏠</span> Ana Sayfa
+                </button>
+                <button class="tab-btn" data-tab="snippets" id="tab-snippets">
+                    <span class="tab-icon">📋</span> Snippets
+                </button>
+                <button class="tab-btn" data-tab="clipboard" id="tab-clipboard">
+                    <span class="tab-icon">📎</span> Pano
+                </button>
+                <button class="tab-btn" data-tab="pomodoro" id="tab-pomodoro">
+                    <span class="tab-icon">🍅</span> Pomodoro
+                </button>
+                <button class="tab-btn" data-tab="settings" id="tab-settings">
+                    <span class="tab-icon">⚙️</span> Ayarlar
+                </button>
+            </nav>
+
+            <!-- MAIN CONTENT AREA -->
+            <main class="main-content">
+                <!-- ===== HOME TAB ===== -->
+                <div class="tab-page active" data-page="home">
+                    <div class="home-layout">
+                        <!-- LEFT: SHORTCUTS -->
+                        <div class="panel-left">
+                            <div class="panel-header">
+                                <h2>Hızlı Aksiyonlar</h2>
+                                <div class="panel-actions">
+                                    <select id="category-filter" title="Kategori Filtrele">
+                                        <option value="all">Tümü</option>
+                                        <option value="web">🌐 Web</option>
+                                        <option value="tools">🔧 Araçlar</option>
+                                        <option value="folders">📂 Klasörler</option>
+                                        <option value="system">⚡ Sistem</option>
+                                        <option value="user">👤 Kullanıcı</option>
+                                    </select>
+                                    <button id="add-action" title="Yeni Aksiyon Ekle">
+                                        <span>+</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="shortcuts-grid" class="shortcuts-grid"></div>
+                        </div>
+
+                        <!-- RIGHT: WIDGETS -->
+                        <div class="panel-right">
+                            <!-- CLOCK -->
+                            <div class="widget widget-clock">
+                                <div class="clock-time" id="time-now">00:00</div>
+                                <div class="clock-seconds" id="time-seconds">00</div>
+                                <div class="clock-date" id="date-now">Yükleniyor...</div>
+                            </div>
+
+                            <!-- WEATHER -->
+                            <div class="widget widget-weather" id="weather-widget">
+                                <div class="widget-label">HAVA DURUMU</div>
+                                <div class="weather-main">
+                                    <span class="weather-temp" id="weather-temp">--°</span>
+                                    <span class="weather-desc" id="weather-desc">Yükleniyor...</span>
+                                </div>
+                                <div class="weather-details">
+                                    <span>💧 <span id="weather-humidity">--</span>%</span>
+                                    <span>💨 <span id="weather-wind">--</span> km/s</span>
+                                    <span>📍 <span id="weather-city">--</span></span>
+                                </div>
+                            </div>
+
+                            <!-- CURRENCY -->
+                            <div class="widget widget-currency">
+                                <div class="widget-label">DÖVİZ KURLARI</div>
+                                <div class="currency-row">
+                                    <span class="cur-flag">🇺🇸</span>
+                                    <span class="cur-name">USD/TRY</span>
+                                    <span class="cur-val" id="usd-val">--</span>
+                                </div>
+                                <div class="currency-row">
+                                    <span class="cur-flag">🇪🇺</span>
+                                    <span class="cur-name">EUR/TRY</span>
+                                    <span class="cur-val" id="eur-val">--</span>
+                                </div>
+                                <div class="currency-row">
+                                    <span class="cur-flag">🇬🇧</span>
+                                    <span class="cur-name">GBP/TRY</span>
+                                    <span class="cur-val" id="gbp-val">--</span>
+                                </div>
+                            </div>
+
+                            <!-- SYSTEM MONITOR -->
+                            <div class="widget widget-system">
+                                <div class="widget-label">SİSTEM MONİTÖR</div>
+                                <div class="sys-bars">
+                                    <div class="sys-bar-item">
+                                        <div class="sys-bar-header">
+                                            <span>CPU</span>
+                                            <span id="cpu-percent">0%</span>
+                                        </div>
+                                        <div class="sys-bar-track">
+                                            <div class="sys-bar-fill cpu-fill" id="cpu-bar" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="sys-bar-item">
+                                        <div class="sys-bar-header">
+                                            <span>RAM</span>
+                                            <span id="ram-percent">0%</span>
+                                        </div>
+                                        <div class="sys-bar-track">
+                                            <div class="sys-bar-fill ram-fill" id="ram-bar" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sys-info-grid">
+                                    <div class="sys-info-item">
+                                        <small>Kullanıcı</small>
+                                        <span id="si-user">-</span>
+                                    </div>
+                                    <div class="sys-info-item">
+                                        <small>Uptime</small>
+                                        <span id="si-uptime">-</span>
+                                    </div>
+                                    <div class="sys-info-item">
+                                        <small>CPU</small>
+                                        <span id="si-cpu">-</span>
+                                    </div>
+                                    <div class="sys-info-item">
+                                        <small>RAM</small>
+                                        <span id="si-ram">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- STICKY NOTE -->
+                            <div class="widget widget-note">
+                                <div class="widget-label">HIZLI NOT 📝</div>
+                                <textarea id="sticky-note" placeholder="Notlarını buraya yaz..."></textarea>
+                            </div>
+
+                            <!-- ALARMS -->
+                            <div class="widget widget-alarms">
+                                <div class="widget-label-row">
+                                    <span class="widget-label">HATIRLATICILAR ⏰</span>
+                                    <button class="mini-btn" id="add-alarm-btn">+</button>
+                                </div>
+                                <div id="alarms-list" class="alarms-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SNIPPETS TAB ===== -->
+                <div class="tab-page" data-page="snippets">
+                    <div class="page-header">
+                        <h2>📋 Snippet Yöneticisi</h2>
+                        <p>Sık kullandığın kod veya metin parçacıklarını kaydet, tek tıkla kopyala.</p>
+                        <button class="primary-btn" id="add-snippet-btn">+ Yeni Snippet</button>
+                    </div>
+                    <div id="snippets-list" class="snippets-list"></div>
+                </div>
+
+                <!-- ===== CLIPBOARD TAB ===== -->
+                <div class="tab-page" data-page="clipboard">
+                    <div class="page-header">
+                        <h2>📎 Pano Geçmişi</h2>
+                        <p>Son kopyalanan metinlerin otomatik olarak buraya kaydedilir.</p>
+                    </div>
+                    <div id="clipboard-list" class="clipboard-list"></div>
+                    <div class="empty-state" id="clipboard-empty">
+                        <span class="empty-icon">📋</span>
+                        <p>Henüz kopyalanan metin yok. Bir şey kopyaladığınızda burada görünecek.</p>
+                    </div>
+                </div>
+
+                <!-- ===== POMODORO TAB ===== -->
+                <div class="tab-page" data-page="pomodoro">
+                    <div class="pomodoro-container">
+                        <div class="pomo-display">
+                            <div class="pomo-ring" id="pomo-ring">
+                                <svg viewBox="0 0 200 200">
+                                    <circle class="pomo-track" cx="100" cy="100" r="90" />
+                                    <circle class="pomo-progress" cx="100" cy="100" r="90" id="pomo-circle"
+                                        stroke-dasharray="565.48" stroke-dashoffset="0" />
+                                </svg>
+                                <div class="pomo-time" id="pomo-time">25:00</div>
+                                <div class="pomo-label" id="pomo-label">ÇALIŞMA</div>
+                            </div>
+                        </div>
+                        <div class="pomo-controls">
+                            <button class="pomo-btn" id="pomo-start">▶ Başlat</button>
+                            <button class="pomo-btn pomo-secondary" id="pomo-reset">↺ Sıfırla</button>
+                        </div>
+                        <div class="pomo-stats">
+                            <div class="pomo-stat">
+                                <span class="pomo-stat-val" id="pomo-sessions">0</span>
+                                <span class="pomo-stat-label">Oturum</span>
+                            </div>
+                            <div class="pomo-stat">
+                                <span class="pomo-stat-val" id="pomo-total-time">0dk</span>
+                                <span class="pomo-stat-label">Toplam</span>
+                            </div>
+                            <div class="pomo-stat">
+                                <span class="pomo-stat-val" id="pomo-mode">Çalışma</span>
+                                <span class="pomo-stat-label">Mod</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SETTINGS TAB ===== -->
+                <div class="tab-page" data-page="settings">
+                    <div class="settings-container">
+                        <h2>⚙️ Ayarlar</h2>
+
+                        <div class="settings-group">
+                            <h3>🎨 Tema</h3>
+                            <div class="theme-grid" id="theme-grid">
+                                <button class="theme-card active" data-theme="midnight">
+                                    <div class="theme-preview midnight-preview"></div>
+                                    <span>Midnight</span>
+                                </button>
+                                <button class="theme-card" data-theme="ocean">
+                                    <div class="theme-preview ocean-preview"></div>
+                                    <span>Ocean</span>
+                                </button>
+                                <button class="theme-card" data-theme="sunset">
+                                    <div class="theme-preview sunset-preview"></div>
+                                    <span>Sunset</span>
+                                </button>
+                                <button class="theme-card" data-theme="forest">
+                                    <div class="theme-preview forest-preview"></div>
+                                    <span>Forest</span>
+                                </button>
+                                <button class="theme-card" data-theme="aurora">
+                                    <div class="theme-preview aurora-preview"></div>
+                                    <span>Aurora</span>
+                                </button>
+                                <button class="theme-card" data-theme="crimson">
+                                    <div class="theme-preview crimson-preview"></div>
+                                    <span>Crimson</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>🍅 Pomodoro Süreleri</h3>
+                            <div class="settings-row">
+                                <label>Çalışma (dk)</label>
+                                <input type="number" id="pomo-work-input" min="1" max="120" value="25">
+                            </div>
+                            <div class="settings-row">
+                                <label>Mola (dk)</label>
+                                <input type="number" id="pomo-break-input" min="1" max="60" value="5">
+                            </div>
+                            <button class="save-btn" id="save-settings-btn">Kaydet</button>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>ℹ️ Hakkında</h3>
+                            <p class="about-text">SPACE Hub v5.0 — Premium Windows masaüstü yardımcısı.<br>
+                                Alt+Space ile her yerden erişim. Tüm araçlarınız tek bir yerde.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- SEARCH OVERLAY -->
+            <div id="search-overlay" class="search-overlay hidden">
+                <div class="overlay-content">
+                    <div class="overlay-title">SONUÇLAR</div>
+                    <div id="results-list" class="results-list"></div>
+                </div>
+            </div>
+
+            <!-- STATUS BAR -->
+            <footer class="status-bar">
+                <div class="status-left">
+                    <span class="status-dot"></span>
+                    <span id="status-txt">Sistem Aktif</span>
+                </div>
+                <div class="status-right">SPACE v5.0</div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ADD SHORTCUT MODAL -->
+    <div id="add-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Yeni Aksiyon Ekle</h3>
+                <button class="modal-close" id="close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Başlık</label>
+                    <input type="text" id="new-name" placeholder="örn: Spotify">
+                </div>
+                <div class="input-group">
+                    <label>Komut</label>
+                    <input type="text" id="new-cmd" placeholder="url:https://... / app:notepad / cmd:...">
+                    <small class="input-hint">url: web, app: uygulama, cmd: komut, folder: klasör</small>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Emoji</label>
+                        <input type="text" id="new-icon" placeholder="🚀">
+                    </div>
+                    <div class="input-group">
+                        <label>Renk</label>
+                        <input type="color" id="new-color" value="#3b82f6">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Kategori</label>
+                    <select id="new-category">
+                        <option value="user">Kullanıcı</option>
+                        <option value="web">Web</option>
+                        <option value="tools">Araçlar</option>
+                        <option value="folders">Klasörler</option>
+                        <option value="system">Sistem</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-modal">Vazgeç</button>
+                <button class="btn-primary" id="save-modal">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNIPPET MODAL -->
+    <div id="snippet-modal" class="modal-overlay hidden">
+        <div class="modal-card modal-wide">
+            <div class="modal-header">
+                <h3>Yeni Snippet</h3>
+                <button class="modal-close" id="close-snippet-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Başlık</label>
+                    <input type="text" id="snippet-title" placeholder="örn: Git Push Komutu">
+                </div>
+                <div class="input-group">
+                    <label>İçerik</label>
+                    <textarea id="snippet-content" placeholder="Kaydetmek istediğin metin veya kod..."
+                        rows="8"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Etiketler (virgülle ayır)</label>
+                    <input type="text" id="snippet-tags" placeholder="git, komut, terminal">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-snippet-modal">Vazgeç</button>
+                <button class="btn-primary" id="save-snippet-modal">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALARM MODAL -->
+    <div id="alarm-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Hatırlatıcı Ekle</h3>
+                <button class="modal-close" id="close-alarm-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Başlık</label>
+                    <input type="text" id="alarm-title" placeholder="örn: Toplantı">
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Dakika Sonra</label>
+                        <input type="number" id="alarm-minutes" min="1" max="1440" value="30">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-alarm-modal">Vazgeç</button>
+                <button class="btn-primary" id="save-alarm-modal">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALARM NOTIFICATION TOAST -->
+    <div id="alarm-toast" class="alarm-toast hidden">
+        <div class="toast-icon">⏰</div>
+        <div class="toast-content">
+            <strong id="toast-title">Alarm!</strong>
+            <p id="toast-desc">Zamanı geldi!</p>
+        </div>
+        <button class="toast-close" id="toast-close">✕</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

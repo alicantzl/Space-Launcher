@@ -1,0 +1,12 @@
+node_modules
+dist
+.space_system_data
+error.log
+*.log
+.DS_Store
+thumbs.db
+.vscode
+.idea
+*.exe
+*.zip
+*.dmg
