@@ -1,104 +1,104 @@
-# 🚀 Space Hub - Premium Desktop Launcher
+# 🚀 Space Hub - Modern Masaüstü Başlatıcı
 
-Space Hub is a powerful, modern, and highly customizable desktop launcher built with **Electron**. It provides quick access to files, system commands, and productivity tools, all accessible with a simple **Alt + Space** shortcut.
+Space Hub, **Electron** ile geliştirilmiş güçlü, modern ve tamamen özelleştirilebilir bir masaüstü başlatıcısıdır. Dosyalarınıza, sistem komutlarına ve üretkenlik araçlarına tek bir **Alt + Space** kısayolu ile anında erişmenizi sağlar.
 
-![Showcase](assets/1.png)
+![Ana Ekran](assets/1.png)
 
-## ✨ Key Features (Özellikler)
+## ✨ Özellikler
 
-| Feature (Özellik) | Description (Açıklama) | Shortcut / Access |
+| Özellik | Açıklama | Kısayol / Erişim |
 |---|---|---|
-| **⚡ Quick Launch** | Open apps, search files, and run commands instantly. | `Alt + Space` |
-| **📁 File Search** | Blazing fast file search powered by PowerShell integration. | Search Bar ("logo.png") |
-| **📋 Clipboard History** | Automatically saves your last 50 copied items. | Widget Panel |
-| **📝 Snippet Manager** | Save and retrieve code snippets or frequent text blocks. | Snippets Tab |
-| **⏱️ Pomodoro Timer** | Built-in focus timer with work/break intervals. | Tools Section |
-| **☁️ Weather & 💱 Currency** | Live weather updates and currency exchange rates. | Dashboard Widgets |
-| **📊 System Monitor** | Real-time CPU and RAM usage graphs. | Dashboard |
-| **⏰ Alarms** | Set reminders and alarms directly from the launcher. | Tools Section |
-| **🎨 Themes** | Switch between beautiful themes (Midnight, Ocean, Sunset, etc.). | Settings (Gear Icon) |
-| **🌐 Web Shortcuts** | Quick access to Google, ChatGPT, Netflix, and more. | Shortcuts Grid |
+| **⚡ Hızlı Başlatıcı** | Uygulamaları açın, dosya arayın ve komutları anında çalıştırın. | `Alt + Space` |
+| **📁 Dosya Arama** | PowerShell entegrasyonu ile desteklenen ışık hızında dosya arama. | Arama Çubuğu |
+| **📋 Pano Geçmişi** | Kopyaladığınız son 50 öğeyi otomatik olarak saklar. | Widget Paneli |
+| **📝 Kod Parçacıkları** | Sık kullandığınız kod bloklarını veya metinleri kaydedin ve yönetin. | Snippets Sekmesi |
+| **⏱️ Pomodoro Sayacı** | Çalışma/mola aralıklarına sahip dahili odaklanma zamanlayıcısı. | Araçlar Bölümü |
+| **☁️ Hava Durumu & 💱 Döviz** | Canlı hava durumu ve güncel döviz kurları (USD, EUR, GBP). | Dashboard Widget'ları |
+| **📊 Sistem Monitörü** | Gerçek zamanlı işlemci (CPU) ve bellek (RAM) kullanım grafikleri. | Dashboard |
+| **⏰ Alarmlar** | Doğrudan başlatıcı üzerinden hatırlatıcılar ve alarmlar kurun. | Araçlar Bölümü |
+| **🎨 Temalar** | Şık temalar (Gece Yarısı, Okyanus, Gün Batımı vb.) arasında geçiş yapın. | Ayarlar (Çark İkonu) |
+| **🌐 Web Kısayolları** | Google, ChatGPT, Netflix ve daha fazlasına hızlı erişim. | Kısayol Izgarası |
 
 ---
 
-## 📸 Screenshots (Görseller)
+## 📸 Ekran Görüntüleri
 
-### Dashboard Overview
-Access all widgets, shortcuts, and system stats in one glance.
+### Kontrol Paneli (Dashboard)
+Tüm widget'lara, kısayollara ve sistem istatistiklerine tek bakışta ulaşın.
 ![Dashboard](assets/2.png)
 
-### Search & Results
-Find files and folders instantly across your system.
+### Arama ve Sonuçlar
+Bilgisayarınızdaki dosya ve klasörleri saniyeler içinde bulun.
 ![Search](assets/3.png)
 
 ---
 
-## 🛠️ Installation (Kurulum)
+## 🛠️ Kurulum
 
-### Option 1: Install via Setup (Recommended)
-1. Download the latest `SpaceHub Setup.exe` from the Releases page.
-2. Run the installer.
-3. The app will launch automatically and persist in the system tray.
+### Seçenek 1: Kurulum Dosyası ile (Önerilen)
+1. GitHub Releases sayfasından en son `SpaceHub Setup.exe` dosyasını indirin.
+2. Kurulumu çalıştırın.
+3. Uygulama otomatik olarak başlayacak ve sistem tepsisine (saat yanına) yerleşecektir.
 
-### Option 2: Run from Source (Developer Mode)
-If you want to run the project locally:
+### Seçenek 2: Kaynak Koddan Çalıştırma (Geliştirici Modu)
+Projeyi yerel ortamınızda çalıştırmak isterseniz:
 
-1. **Clone the repository:**
+1. **Depoyu klonlayın:**
    ```bash
    git clone https://github.com/alicantzl/Space-Launcher.git
    cd Space-Launcher
    ```
 
-2. **Install Dependencies:**
+2. **Bağımlılıkları yükleyin:**
    ```bash
    npm install
    ```
 
-3. **Start the Application:**
-   * **Use `run.bat` (Recommended for Windows):**
-     This script handles environment variables and module conflicts automatically.
-     Double-click `run.bat` or run via terminal:
+3. **Uygulamayı Başlatın:**
+   * **`run.bat` kullanın (Windows için Önerilen):**
+     Bu dosya, ortam değişkenlerini ve modül çakışmalarını otomatik olarak yönetir.
+     `run.bat` dosyasına çift tıklayın veya terminalden çalıştırın:
      ```cmd
      .\run.bat
      ```
-   * *Do NOT use `npm start` directly as it may cause module resolution issues.*
+   * *Not: Doğrudan `npm start` kullanmak modül yükleme hatasına neden olabilir, lütfen `run.bat` kullanın.*
 
 ---
 
-## 🚀 How to Use (Kullanım)
+## 🚀 Kullanım Rehberi
 
-1. **Launch:** Open the app using the desktop shortcut or `run.bat`.
-2. **Access:** Press **`Alt + Space`** (or `Super + Space`) to toggle the launcher visibility.
-3. **Search:** Start typing to search for apps or files.
-4. **Commands:**
-   - Type `cmd:taskmgr` to open Task Manager.
-   - Type `url:google.com` to open a website.
-   - Type `app:calc` to open Calculator.
-5. **System Tray:** Use the tray icon (bottom right) to quit or restart the app.
+1. **Başlatma:** Masaüstü kısayolunu veya `run.bat` dosyasını kullanın.
+2. **Erişim:** Başlatıcıyı gizlemek/göstermek için **`Alt + Space`** (veya `Super + Space`) tuşlarına basın.
+3. **Arama:** Uygulama veya dosya aramak için yazmaya başlayın.
+4. **Komutlar:**
+   - Görev Yöneticisi için: `cmd:taskmgr`
+   - Website açmak için: `url:google.com`
+   - Hesap Makinesi için: `app:calc`
+5. **Sistem Tepsisi:** Uygulamayı tamamen kapatmak veya yeniden başlatmak için sağ alttaki (saat yanı) ikonu kullanın.
 
 ---
 
-## 📦 Build / Packaging
+## 📦 Paketleme / Setup Oluşturma
 
-To create a setup file (`.exe`) for distribution:
+Dağıtım için bir kurulum dosyası (`.exe`) oluşturmak isterseniz:
 
-1. **Close the application** completely.
-2. Run the build script:
+1. Uygulamayı tamamen **kapatın**.
+2. Derleme komut dosyasını çalıştırın:
    ```cmd
    .\build.bat
    ```
-3. The installer will be generated in the `dist/` folder.
+3. Oluşturulan kurulum dosyası `dist/` klasöründe yer alacaktır.
 
 ---
 
-## 🔧 Technical Details
-- **Framework:** Electron v28.2.0 (LTS)
-- **Language:** JavaScript (CommonJS), HTML5, CSS3 (Glassmorphism)
-- **Backend:** Node.js Integration (Search via PowerShell child processes)
-- **Storage:** Local JSON files (`userData`)
+## 🔧 Teknik Detaylar
+- **Altyapı:** Electron v28.2.0 (LTS)
+- **Diller:** JavaScript (CommonJS), HTML5, CSS3 (Glassmorphism)
+- **Backend:** Node.js Entegrasyonu (PowerShell alt süreçleri ile arama)
+- **Depolama:** Yerel JSON dosyaları (`userData` klasöründe)
 
-## 📄 License
-MIT License. Free to use and modify.
+## 📄 Lisans
+MIT Lisansı. Özgürce kullanabilir ve geliştirebilirsiniz.
 
 ---
-Made with ❤️ by [Alican](https://github.com/alicantzl)
+Geliştirici: [Alican](https://github.com/alicantzl)
